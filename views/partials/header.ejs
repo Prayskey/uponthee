@@ -1,21 +1,21 @@
-<header
-  class="fixed top-0 left-0 z-50 flex h-16 w-full items-center justify-between bg-[#55142A] px-4"
->
-  <!-- Logo -->
-  <div class="text-lg font-bold text-white">Uponthee</div>
+<header class="fixed top-0 left-0 z-50 w-full bg-[#55142A] px-4">
+  <div class="flex h-16 items-center justify-between">
+    <!-- Logo -->
+    <div class="text-2xl font-bold text-white">Uponthee</div>
 
-  <!-- Desktop Search -->
-  <div class="hidden md:flex">
-    <form action="/search" method="post">
-      <input
-        type="search"
-        name="query"
-        placeholder="Search..."
-        class="rounded-md border border-gray-300 px-2.5 py-2 text-sm text-white focus:outline-none"
-      />
-    </form>
+    <!-- Desktop Search -->
+    <div class="hidden max-w-md grow md:flex">
+      <form action="/search" method="post" class="w-full">
+        <input
+          type="search"
+          name="query"
+          placeholder="Search for lodge"
+          class="w-full rounded-sm border border-gray-300 px-2.5 py-1 text-white focus:border-[#A79A79] focus:outline-none"
+        />
+      </form>
+    </div>
+
+    <!-- Nav -->
+    <%- include('navbar.ejs') %>
   </div>
-
-  <!-- Nav -->
-  <%- include('navbar.ejs') %>
 </header>

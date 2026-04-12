@@ -13,7 +13,10 @@ const PORT = process.env.PORT;
 const saltRounds = 10;
 
 const db = new pg.Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.SUPABASE_CONNECTION_STRING,
+    ssl: {
+        rejectUnauthorized: false,
+    }
 });
 const pgSession = connectPg(session);
 
@@ -58,8 +61,19 @@ app.get('/password-reset', (req, res) => {
         return res.redirect('/home');
     } else res.render('password-reset.ejs');
 })
-app.get('/home', (req, res) => {
+app.get('/home', async (req, res) => {
     if (!req.isAuthenticated()) {
+
+        try {
+            const result = await db.query("SELECT * FROM users");
+            console.log(result.rows);
+        } catch (err) {
+            console.log(err);
+        }
+
+
+
+
         return res.redirect('/sign-in');
     } else res.render('home.ejs');
 });
