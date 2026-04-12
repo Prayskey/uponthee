@@ -6,6 +6,8 @@ import bcrypt from "bcrypt";
 import connectPg from "connect-pg-simple";
 import pg from "pg";
 import env from "dotenv";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 env.config();
 
 const app = express();
@@ -20,9 +22,17 @@ const db = new pg.Pool({
 });
 const pgSession = connectPg(session);
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Set up EJS as the view engine and specify the views directory
+app.set('views', join(__dirname, '../views'));
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+
+// Serve static files from the public directory
+app.use(express.static(join(__dirname, '../public')));
 app.use(express.urlencoded({ extended: false }));
+
 // Configure session middleware with PostgreSQL store
 app.use(session({
     store: new pgSession({
