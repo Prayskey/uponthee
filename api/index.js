@@ -71,22 +71,49 @@ app.get('/password-reset', (req, res) => {
         return res.redirect('/home');
     } else res.render('password-reset.ejs');
 })
-app.get('/home', async (req, res) => {
+app.get('/home', (req, res) => {
     if (!req.isAuthenticated()) {
-
-        try {
-            const result = await db.query("SELECT * FROM users");
-            console.log(result.rows);
-        } catch (err) {
-            console.log(err);
-        }
-
-
-
-
         return res.redirect('/sign-in');
     } else res.render('home.ejs');
 });
+app.get('/profile', (req, res) => {
+    if (!req.isAuthenticated()) {
+        return res.redirect('/sign-in');
+    } else {
+        res.render('profile.ejs', { user: req.user });
+        console.log(req.user);
+    }
+});
+app.get('/lodges', (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.redirect('/sign-in');
+    } else res.render('lodges.ejs');
+});
+app.get('/about-us', (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.redirect('/sign-in');
+    } else res.render('about-us.ejs');
+});
+app.get('/bookings', (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.redirect('/sign-in');
+    } else res.render('bookings.ejs');
+});
+app.get('/saved', (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.redirect('/sign-in');
+    } else res.render('saved-lodges.ejs');
+});
+app.get('/history', (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.redirect('/sign-in');
+    } else res.render('history.ejs');
+});
+app.get('/settings', (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.redirect('/sign-in');
+    } else res.render('settings.ejs');
+})
 app.post('/sign-up', async (req, res) => {
     try {
         const { firstName, lastName, userName, email, phoneNumber, password } = req.body;
