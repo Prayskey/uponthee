@@ -52,37 +52,35 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', (req, res) => {
-    if (req.isAuthenticated()) {
-        return res.redirect('/home');
-    } else res.render('sign-in.ejs');
+    if (!req.isAuthenticated()) {
+        return res.render('about-us.ejs');
+    } else return res.render('home.ejs');
 });
 app.get('/sign-up', (req, res) => {
-    if (req.isAuthenticated()) {
-        return res.redirect('/home');
-    } else res.render('sign-up.ejs');
+    if (!req.isAuthenticated()) {
+        return res.render('sign-up.ejs');
+    } else res.redirect('/home');
 });
 app.get('/sign-in', (req, res) => {
-    if (req.isAuthenticated()) {
-        return res.redirect('/home');
-    }
-    res.render('sign-in.ejs');
+    if (!req.isAuthenticated()) {
+        return res.render('sign-in.ejs');
+    } else res.redirect('/home');
 });
 app.get('/password-reset', (req, res) => {
-    if (req.isAuthenticated()) {
-        return res.redirect('/home');
+    if (!req.isAuthenticated()) {
+        return res.redirect('/');
     } else res.render('password-reset.ejs');
 })
 app.get('/home', (req, res) => {
     if (!req.isAuthenticated()) {
-        return res.redirect('/sign-in');
+        return res.redirect('/');
     } else res.render('home.ejs');
 });
 app.get('/profile', (req, res) => {
     if (!req.isAuthenticated()) {
-        return res.redirect('/sign-in');
+        return res.redirect('/');
     } else {
-        res.render('profile.ejs', { user: req.user });
-        
+        return res.render('profile.ejs', { user: req.user });
     }
 });
 app.get('/lodges', (req, res) => {
@@ -92,27 +90,27 @@ app.get('/lodges', (req, res) => {
 });
 app.get('/about-us', (req, res) => {
     if (!req.isAuthenticated()) {
-        res.redirect('/sign-in');
+        res.redirect('/');
     } else res.render('about-us.ejs');
 });
 app.get('/bookings', (req, res) => {
     if (!req.isAuthenticated()) {
-        res.redirect('/sign-in');
+        res.redirect('/');
     } else res.render('bookings.ejs');
 });
 app.get('/saved', (req, res) => {
     if (!req.isAuthenticated()) {
-        res.redirect('/sign-in');
+        res.redirect('/');
     } else res.render('saved-lodges.ejs');
 });
 app.get('/history', (req, res) => {
     if (!req.isAuthenticated()) {
-        res.redirect('/sign-in');
+        res.redirect('/');
     } else res.render('history.ejs');
 });
 app.get('/settings', (req, res) => {
     if (!req.isAuthenticated()) {
-        res.redirect('/sign-in');
+        res.redirect('/');
     } else res.render('settings.ejs');
 })
 app.post('/sign-up', async (req, res) => {
