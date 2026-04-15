@@ -1,1 +1,62 @@
-<h1>All transaction history goes in here</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transaction History</title>
+  <link href="/src/output.css" rel="stylesheet" />
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+
+<main class="pt-14 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
+
+  <!-- HEADER -->
+  <div class="mb-8">
+    <h1 class="text-2xl sm:text-3xl font-semibold text-gray-900">
+      Transaction History
+    </h1>
+    <p class="text-sm text-gray-500 mt-1">
+      All your payments, refunds, and lodge bookings
+    </p>
+  </div>
+
+  <!-- SUMMARY CARDS -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+
+    <div class="bg-white border border-gray-100 rounded-2xl p-4">
+      <p class="text-xs text-gray-400 uppercase">Total spent</p>
+      <p class="text-xl font-semibold text-gray-900 mt-1" id="spent">₦0</p>
+    </div>
+
+    <div class="bg-white border border-gray-100 rounded-2xl p-4">
+      <p class="text-xs text-gray-400 uppercase">Successful</p>
+      <p class="text-xl font-semibold text-green-600 mt-1" id="success">0</p>
+    </div>
+
+    <div class="bg-white border border-gray-100 rounded-2xl p-4">
+      <p class="text-xs text-gray-400 uppercase">Pending</p>
+      <p class="text-xl font-semibold text-yellow-600 mt-1" id="pending">0</p>
+    </div>
+
+  </div>
+
+  <!-- LIST -->
+  <div id="history-list" class="space-y-4"></div>
+
+  <!-- EMPTY STATE -->
+  <div id="empty-state" class="hidden text-center py-24">
+    <div class="text-4xl mb-3">📭</div>
+    <h3 class="text-lg font-semibold text-gray-800">
+      No transactions yet
+    </h3>
+    <p class="text-sm text-gray-500 mt-1">
+      Your payment history will appear here after your first booking
+    </p>
+  </div>
+
+</main>
+
+<script src="/js/history.js"></script>
+</body>
+</html>

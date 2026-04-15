@@ -1,1 +1,132 @@
-<h1>This is the settings page</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings</title>
+  <link href="/src/output.css" rel="stylesheet"/>
+</head>
+
+<body class="bg-[#f6f7fb] min-h-screen">
+
+<main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-10 py-12">
+
+  <!-- HEADER -->
+  <div class="mb-10">
+    <h1 class="text-3xl font-semibold text-gray-900 tracking-tight">Settings</h1>
+    <p class="text-sm text-gray-500 mt-1">Control your experience with precision</p>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="space-y-5" id="settings">
+
+    <!-- CARD -->
+    <div class="setting-card">
+      <button class="setting-toggle">
+        <div>
+          <p class="text-gray-900 font-medium">Profile Preferences</p>
+          <p class="text-xs text-gray-500">Visibility & personalization</p>
+        </div>
+
+        <svg class="chev w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+
+      <div class="setting-content">
+        <label class="flex justify-between text-sm text-gray-600">
+          Show profile publicly
+          <input type="checkbox" class="accent-black"/>
+        </label>
+
+        <label class="flex justify-between text-sm text-gray-600 mt-3">
+          Enable recommendations
+          <input type="checkbox" class="accent-black"/>
+        </label>
+      </div>
+    </div>
+
+    <!-- SECURITY -->
+    <div class="setting-card">
+      <button class="setting-toggle">
+        <div>
+          <p class="text-gray-900 font-medium">Security</p>
+          <p class="text-xs text-gray-500">Password & authentication</p>
+        </div>
+
+        <svg class="chev w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+
+      <div class="setting-content space-y-3">
+        <input type="password" placeholder="Current password"
+          class="input"/>
+
+        <input type="password" placeholder="New password"
+          class="input"/>
+
+        <input type="password" placeholder="Confirm password"
+          class="input"/>
+
+        <button class="w-full bg-gray-900 text-white text-sm py-2.5 rounded-xl hover:bg-gray-800 transition">
+          Update Password
+        </button>
+      </div>
+    </div>
+
+    <!-- PRIVACY -->
+    <div class="setting-card">
+      <button class="setting-toggle">
+        <div>
+          <p class="text-gray-900 font-medium">Privacy</p>
+          <p class="text-xs text-gray-500">Data control & export</p>
+        </div>
+
+        <svg class="chev w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+
+      <div class="setting-content space-y-3">
+        <button class="w-full text-left px-4 py-3 border rounded-xl hover:bg-gray-50 transition">
+          Download my data
+        </button>
+
+        <button class="w-full text-left px-4 py-3 border rounded-xl hover:bg-gray-50 transition">
+          Manage sessions
+        </button>
+      </div>
+    </div>
+
+    <!-- DANGER -->
+    <div class="setting-card danger">
+      <button class="setting-toggle">
+        <div>
+          <p class="text-red-600 font-medium">Danger Zone</p>
+          <p class="text-xs text-gray-500">Permanent actions</p>
+        </div>
+
+        <svg class="chev w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+
+      <div class="setting-content">
+        <button class="w-full bg-red-600 text-white text-sm py-2.5 rounded-xl hover:bg-red-700 transition">
+          Delete account
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script src="/js/settings.js"></script>
+</body>
+</html>

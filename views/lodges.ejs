@@ -1,12 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/output.css">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lodges</title>
+  <link href="/src/output.css" rel="stylesheet"/>
 </head>
-<body>
-    <h1>This is the page for all lodges</h1>
+
+<body class="bg-[#f6f7fb] min-h-screen">
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12">
+
+  <!-- HEADER -->
+  <div class="mb-10">
+    <p class="text-xs uppercase tracking-widest text-gray-400">Community</p>
+    <h1 id="community-title" class="text-3xl sm:text-4xl font-semibold text-gray-900 tracking-tight">
+      Lekki Phase 1
+    </h1>
+    <p class="text-sm text-gray-500 mt-2">
+      Discover available lodges curated for your stay
+    </p>
+  </div>
+
+  <!-- GRID -->
+  <div id="lodges-grid"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  </div>
+
+  <!-- EMPTY -->
+  <div id="empty" class="hidden text-center py-24">
+    <p class="text-gray-500 text-sm">No lodges available in this area yet.</p>
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="flex items-center justify-center gap-4 mt-12">
+
+    <button id="prevBtn"
+      class="px-5 py-2 rounded-xl border border-gray-200 text-sm text-gray-600 hover:bg-gray-100 transition disabled:opacity-40 disabled:cursor-not-allowed">
+      Previous
+    </button>
+
+    <span id="pageInfo" class="text-sm text-gray-500"></span>
+
+    <button id="nextBtn"
+      class="px-5 py-2 rounded-xl border border-gray-200 text-sm text-gray-600 hover:bg-gray-100 transition disabled:opacity-40 disabled:cursor-not-allowed">
+      Next
+    </button>
+
+  </div>
+
+</main>
+
+<script src="/js/lodges.js"></script>
 </body>
 </html>
