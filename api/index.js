@@ -82,7 +82,7 @@ app.get('/profile', (req, res) => {
         return res.redirect('/sign-in');
     } else {
         res.render('profile.ejs', { user: req.user });
-        console.log(req.user);
+        
     }
 });
 app.get('/lodges', (req, res) => {
