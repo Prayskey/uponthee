@@ -13,131 +13,139 @@
 
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       <!-- CARD -->
-      <div
-        class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-      >
-        <!-- SAVE BUTTON -->
-        <button
-          class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-          data-id="1"
+      <a href="/select-lodge">
+        <div
+          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
         >
-          <svg
-            class="h-5 w-5 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+          <!-- SAVE BUTTON -->
+          <button
+            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
+            data-id="1"
           >
-            <path
-              d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
+            <svg
+              class="h-5 w-5 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
+              />
+            </svg>
+          </button>
+
+          <div class="overflow-hidden">
+            <img
+              src="/images/lodge1.jpg"
+              class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
             />
-          </svg>
-        </button>
+          </div>
 
-        <div class="overflow-hidden">
-          <img
-            src="/images/lodge1.jpg"
-            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-          />
+          <div class="space-y-1 p-4">
+            <h3 class="font-semibold">Sunrise Lodge</h3>
+            <p class="text-xs text-gray-500">Umuchima</p>
+            <p class="text-sm font-medium text-[#55142A]">₦120,000 / year</p>
+          </div>
         </div>
-
-        <div class="space-y-1 p-4">
-          <h3 class="font-semibold">Sunrise Lodge</h3>
-          <p class="text-xs text-gray-500">Umuchima</p>
-          <p class="text-sm font-medium text-[#55142A]">₦120,000 / year</p>
-        </div>
-      </div>
+      </a>
 
       <!-- Repeat cards -->
-      <div
-        class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-      >
-        <button
-          class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-          data-id="2"
+      <a href="/select-lodge">
+        <div
+          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
         >
-          <svg
-            class="h-5 w-5 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+          <button
+            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
+            data-id="2"
           >
-            <path
-              d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-            />
-          </svg>
-        </button>
-        <img
-          src="/images/lodge2.jpg"
-          class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-        />
-        <div class="space-y-1 p-4">
-          <h3 class="font-semibold">Prime Lodge</h3>
-          <p class="text-xs text-gray-500">Umuchima</p>
-          <p class="text-sm font-medium text-[#55142A]">₦150,000 / year</p>
+            <svg
+              class="h-5 w-5 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
+              />
+            </svg>
+          </button>
+          <img
+            src="/images/lodge2.jpg"
+            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+          <div class="space-y-1 p-4">
+            <h3 class="font-semibold">Prime Lodge</h3>
+            <p class="text-xs text-gray-500">Umuchima</p>
+            <p class="text-sm font-medium text-[#55142A]">₦150,000 / year</p>
+          </div>
         </div>
-      </div>
+      </a>
 
-      <div
-        class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-      >
-        <button
-          class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-          data-id="3"
+      <a href="/select-lodge">
+        <div
+          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
         >
-          <svg
-            class="h-5 w-5 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+          <button
+            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
+            data-id="3"
           >
-            <path
-              d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-            />
-          </svg>
-        </button>
-        <img
-          src="/images/lodge3.jpg"
-          class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-        />
-        <div class="space-y-1 p-4">
-          <h3 class="font-semibold">Elite Stay</h3>
-          <p class="text-xs text-gray-500">Umuchima</p>
-          <p class="text-sm font-medium text-[#55142A]">₦180,000 / year</p>
+            <svg
+              class="h-5 w-5 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
+              />
+            </svg>
+          </button>
+          <img
+            src="/images/lodge3.jpg"
+            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+          <div class="space-y-1 p-4">
+            <h3 class="font-semibold">Elite Stay</h3>
+            <p class="text-xs text-gray-500">Umuchima</p>
+            <p class="text-sm font-medium text-[#55142A]">₦180,000 / year</p>
+          </div>
         </div>
-      </div>
+      </a>
 
-      <div
-        class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-      >
-        <button
-          class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-          data-id="4"
+      <a href="/select-lodge">
+        <div
+          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
         >
-          <svg
-            class="h-5 w-5 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+          <button
+            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
+            data-id="4"
           >
-            <path
-              d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-            />
-          </svg>
-        </button>
-        <img
-          src="/images/lodge4.jpg"
-          class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-        />
-        <div class="space-y-1 p-4">
-          <h3 class="font-semibold">Budget Lodge</h3>
-          <p class="text-xs text-gray-500">Umuchima</p>
-          <p class="text-sm font-medium text-[#55142A]">₦90,000 / year</p>
+            <svg
+              class="h-5 w-5 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
+              />
+            </svg>
+          </button>
+          <img
+            src="/images/lodge4.jpg"
+            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+          <div class="space-y-1 p-4">
+            <h3 class="font-semibold">Budget Lodge</h3>
+            <p class="text-xs text-gray-500">Umuchima</p>
+            <p class="text-sm font-medium text-[#55142A]">₦90,000 / year</p>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
   </section>
 
@@ -156,127 +164,135 @@
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       <!-- Repeat same structure with lodge5 - lodge8 -->
 
-      <div
-        class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-      >
-        <button
-          class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-          data-id="5"
+      <a href="/select-lodge">
+        <div
+          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
         >
-          <svg
-            class="h-5 w-5 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+          <button
+            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
+            data-id="5"
           >
-            <path
-              d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-            />
-          </svg>
-        </button>
-        <img
-          src="/images/lodge5.jpg"
-          class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-        />
-        <div class="space-y-1 p-4">
-          <h3 class="font-semibold">Royal Lodge</h3>
-          <p class="text-xs text-gray-500">Eziobodo</p>
-          <p class="text-sm font-medium text-[#55142A]">₦130,000 / year</p>
+            <svg
+              class="h-5 w-5 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
+              />
+            </svg>
+          </button>
+          <img
+            src="/images/lodge5.jpg"
+            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+          <div class="space-y-1 p-4">
+            <h3 class="font-semibold">Royal Lodge</h3>
+            <p class="text-xs text-gray-500">Eziobodo</p>
+            <p class="text-sm font-medium text-[#55142A]">₦130,000 / year</p>
+          </div>
         </div>
-      </div>
+      </a>
 
-      <!-- continue for lodge6,7,8 same pattern -->
-             <!-- Repeat cards -->
-      <div
-        class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-      >
-        <button
-          class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-          data-id="2"
-        >
-          <svg
-            class="h-5 w-5 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-            />
-          </svg>
-        </button>
-        <img
-          src="/images/lodge6.jpg"
-          class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-        />
-        <div class="space-y-1 p-4">
-          <h3 class="font-semibold">Prime Lodge</h3>
-          <p class="text-xs text-gray-500">Umuchima</p>
-          <p class="text-sm font-medium text-[#55142A]">₦150,000 / year</p>
-        </div>
-      </div>
+      <!-- Repeated Lodges -->
 
-      <div
-        class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-      >
-        <button
-          class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-          data-id="3"
+      <a href="/select-lodge">
+        <div
+          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
         >
-          <svg
-            class="h-5 w-5 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+          <button
+            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
+            data-id="2"
           >
-            <path
-              d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-            />
-          </svg>
-        </button>
-        <img
-          src="/images/lodge7.jpg"
-          class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-        />
-        <div class="space-y-1 p-4">
-          <h3 class="font-semibold">Elite Stay</h3>
-          <p class="text-xs text-gray-500">Umuchima</p>
-          <p class="text-sm font-medium text-[#55142A]">₦180,000 / year</p>
+            <svg
+              class="h-5 w-5 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
+              />
+            </svg>
+          </button>
+          <img
+            src="/images/lodge6.jpg"
+            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+          <div class="space-y-1 p-4">
+            <h3 class="font-semibold">Prime Lodge</h3>
+            <p class="text-xs text-gray-500">Umuchima</p>
+            <p class="text-sm font-medium text-[#55142A]">₦150,000 / year</p>
+          </div>
         </div>
-      </div>
+      </a>
 
-      <div
-        class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-      >
-        <button
-          class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-          data-id="4"
+      <a href="/select-lodge">
+        <div
+          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
         >
-          <svg
-            class="h-5 w-5 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
+          <button
+            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
+            data-id="3"
           >
-            <path
-              d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-            />
-          </svg>
-        </button>
-        <img
-          src="/images/lodge8.jpg"
-          class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-        />
-        <div class="space-y-1 p-4">
-          <h3 class="font-semibold">Budget Lodge</h3>
-          <p class="text-xs text-gray-500">Umuchima</p>
-          <p class="text-sm font-medium text-[#55142A]">₦90,000 / year</p>
+            <svg
+              class="h-5 w-5 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
+              />
+            </svg>
+          </button>
+          <img
+            src="/images/lodge7.jpg"
+            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+          <div class="space-y-1 p-4">
+            <h3 class="font-semibold">Elite Stay</h3>
+            <p class="text-xs text-gray-500">Umuchima</p>
+            <p class="text-sm font-medium text-[#55142A]">₦180,000 / year</p>
+          </div>
         </div>
-      </div>
+      </a>
+
+      <a href="/select-lodge">
+        <div
+          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
+        >
+          <button
+            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
+            data-id="4"
+          >
+            <svg
+              class="h-5 w-5 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
+              />
+            </svg>
+          </button>
+          <img
+            src="/images/lodge8.jpg"
+            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+          <div class="space-y-1 p-4">
+            <h3 class="font-semibold">Budget Lodge</h3>
+            <p class="text-xs text-gray-500">Umuchima</p>
+            <p class="text-sm font-medium text-[#55142A]">₦90,000 / year</p>
+          </div>
+        </div>
+      </a>
     </div>
   </section>
 </section>

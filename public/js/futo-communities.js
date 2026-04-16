@@ -2,7 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const buttons = document.querySelectorAll('.save-btn');
 
   buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      
       btn.classList.toggle('saved');
 
       const icon = btn.querySelector('svg');
