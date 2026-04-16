@@ -1,58 +1,79 @@
-<section>
-  <div class="swiper w-full">
+
+<section class="carousel-section">
+
+  <!-- Slide counter -->
+  <div class="slide-counter" id="slide-counter">1 / 3</div>
+
+  <!-- Autoplay progress -->
+  <div class="autoplay-progress">
+    <div class="autoplay-progress-fill" id="autoplay-progress-fill"></div>
+  </div>
+
+  <div class="swiper" id="main-carousel">
     <div class="swiper-wrapper">
+
+      <!-- Slide 1 -->
       <div class="swiper-slide">
-        <img
-          src="/images/lodge1.jpg"
-          alt="Accommodation view 1"
-          class="h-64 w-full object-cover md:h-[480px]"
-        />
+        <img src="/images/lodge1.jpg" alt="Emerald Heights Lodge" />
+        <div class="slide-caption">
+          <p class="slide-caption-label">Featured lodge</p>
+          <p class="slide-caption-title">Emerald Heights Lodge</p>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="swiper-slide">
+        <img src="/images/lodge2.jpg" alt="Riverside Guest House" />
+        <div class="slide-caption">
+          <p class="slide-caption-label">Popular stay</p>
+          <p class="slide-caption-title">Riverside Guest House</p>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="swiper-slide">
+        <img src="/images/lodge3.jpg" alt="Skyline Apartment" />
+        <div class="slide-caption">
+          <p class="slide-caption-label">City views</p>
+          <p class="slide-caption-title">Skyline Apartment</p>
+        </div>
+      </div>
+
+      <!-- Duplicates for loop -->
+      <div class="swiper-slide">
+        <img src="/images/lodge1.jpg" alt="Emerald Heights Lodge" />
+        <div class="slide-caption">
+          <p class="slide-caption-label">Featured lodge</p>
+          <p class="slide-caption-title">Emerald Heights Lodge</p>
+        </div>
       </div>
 
       <div class="swiper-slide">
-        <img
-          src="/images/lodge2.jpg"
-          alt="Accommodation view 2"
-          class="h-64 w-full object-cover md:h-[480px]"
-        />
+        <img src="/images/lodge2.jpg" alt="Riverside Guest House" />
+        <div class="slide-caption">
+          <p class="slide-caption-label">Popular stay</p>
+          <p class="slide-caption-title">Riverside Guest House</p>
+        </div>
       </div>
 
       <div class="swiper-slide">
-        <img
-          src="/images/lodge3.jpg"
-          alt="Accommodation view 3"
-          class="h-64 w-full object-cover md:h-[480px]"
-        />
+        <img src="/images/lodge3.jpg" alt="Skyline Apartment" />
+        <div class="slide-caption">
+          <p class="slide-caption-label">City views</p>
+          <p class="slide-caption-title">Skyline Apartment</p>
+        </div>
       </div>
 
-      <!-- Duplicates so loop has enough slides to work with -->
-      <div class="swiper-slide">
-        <img
-          src="/images/lodge1.jpg"
-          alt="Accommodation view 1"
-          class="h-64 w-full object-cover md:h-[480px]"
-        />
-      </div>
-
-      <div class="swiper-slide">
-        <img
-          src="/images/lodge2.jpg"
-          alt="Accommodation view 2"
-          class="h-64 w-full object-cover md:h-[480px]"
-        />
-      </div>
-
-      <div class="swiper-slide">
-        <img
-          src="/images/lodge3.jpg"
-          alt="Accommodation view 3"
-          class="h-64 w-full object-cover md:h-[480px]"
-        />
-      </div>
     </div>
 
+    <!-- Pagination dots -->
     <div class="swiper-pagination"></div>
+
+    <!-- Navigation -->
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
   </div>
+
 </section>
+
+<script src="/js/carousel.js"></script>
