@@ -15,11 +15,11 @@ const PORT = process.env.PORT;
 const saltRounds = 10;
 
 const db = new pg.Pool({
-    connectionString: process.env.SUPABASE_CONNECTION_STRING,
-    // connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false,
-    }
+    // connectionString: process.env.SUPABASE_CONNECTION_STRING,
+    connectionString: process.env.DATABASE_URL,
+    // ssl: {
+    //     rejectUnauthorized: false,
+    // }
 });
 const pgSession = connectPg(session);
 
@@ -93,13 +93,6 @@ app.get('/about-us', (req, res) => {
         res.redirect('/');
     } else res.render('about-us.ejs');
 });
-app.get('/select-lodge', (req, res) => {
-    if(!req.isAuthenticated()) {
-        return res.redirect('/');
-    } else {
-        return res.render('selected-lodge.ejs');
-    }
-});
 app.get('/bookings', (req, res) => {
     if (!req.isAuthenticated()) {
         res.redirect('/');
@@ -120,6 +113,80 @@ app.get('/settings', (req, res) => {
         res.redirect('/');
     } else res.render('settings.ejs');
 })
+
+////////////////////////////////////////////////////////////
+
+
+
+app.get('/select-lodge/:id', (req, res) => {
+    const lodgeId = parseInt(req.params.id, 10);
+
+    // ❌ Invalid ID guard
+    if (isNaN(lodgeId)) {
+        return res.status(400).send('Invalid lodge ID');
+    }
+
+    // 🔹 Your lodge data (replace with DB later)
+    const lodges = [
+        {
+            id: 1,
+            name: 'Emerald Heights Lodge',
+            description: 'Well-maintained lodge with steady water and security.',
+            price: 120000,
+            caution: 10000,
+            available: true,
+            amenities: ['Water', 'Security', 'Parking'],
+            images: [
+                '/images/lodge1.jpg',
+                '/images/lodge2.jpg',
+                '/images/lodge3.jpg'
+            ],
+            landlord: {
+                name: 'Mr. Obi',
+                phone: '08012345678'
+            },
+            reviews: []
+        },
+        {
+            id: 2,
+            name: 'Royal Palm Lodge',
+            description: 'Comfortable lodge with good accessibility.',
+            price: 150000,
+            caution: 15000,
+            available: false,
+            amenities: ['Water', 'Security'],
+            images: [
+                '/images/lodge4.jpg',
+                '/images/lodge5.jpg'
+            ],
+            landlord: {
+                name: 'Mrs. Ada',
+                phone: '08087654321'
+            },
+            reviews: []
+        }
+    ];
+
+    // 🔍 Find lodge
+    const lodge = lodges.find(l => l.id === lodgeId);
+
+    // ❌ Not found
+    if (!lodge) {
+        return res.status(404).render('404', {
+            message: 'Lodge not found'
+        });
+    }
+
+    // ✅ Render page (matches your EJS perfectly)
+    res.render('selected-lodge', { lodge });
+});
+
+
+
+
+
+
+////////////////////////////////////////////////////////////
 app.post('/sign-up', async (req, res) => {
     try {
         const { firstName, lastName, userName, email, phoneNumber, password } = req.body;
@@ -196,7 +263,7 @@ passport.deserializeUser(async (user, done) => {
         done(err);
     }
 });
-// app.listen(PORT, () => {
-//     console.log(`Server is running at PORT: ${PORT}`);
-// });
-export default app;
+app.listen(PORT, () => {
+    console.log(`Server is running at PORT: ${PORT}`);
+});
+// export default app;

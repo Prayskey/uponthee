@@ -1,22 +1,129 @@
+<style>
+  #mobile-menu { transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); will-change: transform; }
+  #mobile-menu.open { transform: translateX(0); }
+  #menu-overlay { display: none; opacity: 0; transition: opacity 0.3s ease; }
+  #menu-overlay.open { display: block; opacity: 1; }
+  #profile-dropdown { opacity: 0; transform: translateY(-6px) scale(0.97); transition: opacity 0.18s ease, transform 0.18s cubic-bezier(0.22,1,0.36,1); pointer-events: none; }
+  #profile-dropdown.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .nav-link { position: relative; padding-bottom: 2px; }
+  .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: rgba(255,255,255,0.6); transition: width 0.25s ease; }
+  .nav-link:hover::after { width: 100%; }
+  .mobile-nav-link { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.2s, padding-left 0.2s; color: rgba(255,255,255,0.85); font-size: 15px; text-decoration: none; }
+  .mobile-nav-link:hover { color: #fff; padding-left: 6px; }
+  #profile-toggle .avatar-ring { transition: box-shadow 0.2s ease, background 0.2s ease; }
+  #profile-toggle:hover .avatar-ring { box-shadow: 0 0 0 3px rgba(255,255,255,0.15); background: rgba(255,255,255,0.25); }
+  .mobile-search-input { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: white; transition: border-color 0.2s, background 0.2s; }
+  .mobile-search-input::placeholder { color: rgba(255,255,255,0.4); }
+  .mobile-search-input:focus { background: rgba(255,255,255,0.12); border-color: rgba(167,154,121,0.6); outline: none; }
+  .ham-line { display: block; width: 22px; height: 1.5px; background: white; border-radius: 999px; transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease; transform-origin: center; }
+  .menu-is-open .ham-line-1 { transform: translateY(6px) rotate(45deg); }
+  .menu-is-open .ham-line-2 { opacity: 0; width: 0; }
+  .menu-is-open .ham-line-3 { transform: translateY(-6px) rotate(-45deg); }
+  .drop-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; font-size: 13px; color: #374151; text-decoration: none; transition: background 0.15s; background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; width: 100%; }
+  .drop-item:hover { background: #f9fafb; }
+</style>
+
 <header class="fixed top-0 left-0 z-50 h-16 w-full bg-[#55142A]">
-  <div
-    class="mx-auto flex h-full max-w-7xl items-center justify-between px-5 md:px-8"
-  >
-    <!-- Logo -->
-    <a href="/home" class="flex items-center gap-2 select-none">
-      <span
-        class="font-display text-xl font-semibold tracking-wide text-white"
-        style="
-          font-family: &quot;Cormorant Garamond&quot;, serif;
-          letter-spacing: 0.06em;
-        "
-      >
-        Uponthee
-      </span>
-    </a>
+  <div class="mx-auto flex h-full max-w-7xl items-center justify-between px-5 md:px-8">
 
-    <%- include('navbar.ejs') %>
+    <a href="<%= typeof user !== 'undefined' && user ? '/home' : '/' %>" style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:white;letter-spacing:0.06em;text-decoration:none;flex-shrink:0;">Uponthee</a>
 
-    <script src="/js/navbar.js"></script>
+    <% if (typeof user !== 'undefined' && user) { %>
+    <!-- Logged in desktop nav -->
+    <nav class="hidden items-center gap-8 md:flex">
+      <ul class="flex items-center gap-8">
+        <li><a href="/home"     class="nav-link text-sm font-medium text-white/90 hover:text-white transition-colors">Home</a></li>
+        <li><a href="/lodges"   class="nav-link text-sm font-medium text-white/90 hover:text-white transition-colors">Lodges</a></li>
+        <li><a href="/about-us" class="nav-link text-sm font-medium text-white/90 hover:text-white transition-colors">About Us</a></li>
+      </ul>
+      <div class="relative">
+        <button id="profile-toggle" class="flex cursor-pointer items-center gap-2 focus:outline-none" aria-label="Profile menu" aria-expanded="false" aria-haspopup="true">
+          <div class="avatar-ring flex h-9 w-9 items-center justify-center rounded-full bg-white/20">
+            <svg style="width:18px;height:18px;" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0"/></svg>
+          </div>
+          <svg id="dropdown-chevron" style="width:14px;height:14px;transition:transform 0.2s ease;" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div id="profile-dropdown" class="absolute right-0 top-[calc(100%+10px)] z-50 w-52 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl">
+          <div style="border-bottom:1px solid #f3f4f6;padding:12px 16px;">
+            <p style="font-size:11px;color:#9ca3af;">Signed in as</p>
+            <p style="font-size:13px;font-weight:500;color:#111827;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><%= user.first_name %> <%= user.last_name %></p>
+          </div>
+          <a href="/profile"  class="drop-item"><svg style="width:14px;height:14px;color:#55142A;flex-shrink:0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.501 20.118a7.5 7.5 0 0 1 14.998 0"/></svg>My Profile</a>
+          <a href="/bookings" class="drop-item"><svg style="width:14px;height:14px;color:#55142A;flex-shrink:0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25"/></svg>My Bookings</a>
+          <a href="/saved"    class="drop-item"><svg style="width:14px;height:14px;color:#55142A;flex-shrink:0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>Saved</a>
+          <a href="/history"  class="drop-item"><svg style="width:14px;height:14px;color:#55142A;flex-shrink:0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>History</a>
+          <a href="/settings" class="drop-item"><svg style="width:14px;height:14px;color:#55142A;flex-shrink:0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>Settings</a>
+          <div style="border-top:1px solid #f3f4f6;">
+            <form action="/logout" method="post"><button type="submit" class="drop-item" style="color:#dc2626;">
+              <svg style="width:14px;height:14px;flex-shrink:0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"/></svg>Logout
+            </button></form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <button id="menu-toggle" class="flex flex-col items-center justify-center gap-[5px] p-1 focus:outline-none md:hidden" aria-label="Toggle menu">
+      <span class="ham-line ham-line-1"></span><span class="ham-line ham-line-2"></span><span class="ham-line ham-line-3"></span>
+    </button>
+
+    <% } else { %>
+    <!-- Logged out desktop nav -->
+    <div class="hidden items-center gap-5 md:flex">
+      <a href="/sign-in"  style="font-size:13px;color:rgba(255,255,255,0.8);text-decoration:none;">Login</a>
+      <a href="/sign-up"  style="font-size:13px;font-weight:500;background:white;color:#55142A;padding:8px 20px;border-radius:999px;text-decoration:none;">Get started</a>
+    </div>
+    <button id="menu-toggle" class="flex flex-col items-center justify-center gap-[5px] p-1 focus:outline-none md:hidden" aria-label="Toggle menu">
+      <span class="ham-line ham-line-1"></span><span class="ham-line ham-line-2"></span><span class="ham-line ham-line-3"></span>
+    </button>
+    <% } %>
   </div>
 </header>
+
+<div id="menu-overlay" class="fixed inset-0 z-40 bg-black/50"></div>
+
+<div id="mobile-menu" class="fixed top-0 left-0 z-50 flex flex-col bg-[#55142A]" style="height:100dvh;width:280px;" aria-hidden="true">
+  <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);padding:16px 20px;">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:white;letter-spacing:0.05em;">Uponthee</span>
+    <button id="menu-close-btn" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+      <svg style="width:16px;height:16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <% if (typeof user !== 'undefined' && user) { %>
+  <div style="padding:16px 20px 8px;">
+    <form action="/search" method="get">
+      <div style="position:relative;">
+        <svg style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:rgba(255,255,255,0.4);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
+        <input type="search" name="q" placeholder="Search lodges..." class="mobile-search-input" style="width:100%;border-radius:10px;padding:9px 12px 9px 32px;font-size:13px;font-family:'DM Sans',sans-serif;box-sizing:border-box;" />
+      </div>
+    </form>
+  </div>
+  <nav style="padding:8px 20px;flex:1;overflow-y:auto;">
+    <p style="font-size:10px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Menu</p>
+    <a href="/home"     class="mobile-nav-link">Home</a>
+    <a href="/lodges"   class="mobile-nav-link">Lodges</a>
+    <a href="/about-us" class="mobile-nav-link">About Us</a>
+    <div style="margin:12px 0;border-top:1px solid rgba(255,255,255,0.08);"></div>
+    <p style="font-size:10px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Account</p>
+    <a href="/profile"  class="mobile-nav-link">My Profile</a>
+    <a href="/bookings" class="mobile-nav-link">My Bookings</a>
+    <a href="/saved"    class="mobile-nav-link">Saved</a>
+    <a href="/history"  class="mobile-nav-link">History</a>
+    <a href="/settings" class="mobile-nav-link">Settings</a>
+  </nav>
+  <div style="border-top:1px solid rgba(255,255,255,0.08);padding:16px 20px;">
+    <form action="/logout" method="post">
+      <button type="submit" style="display:flex;align-items:center;gap:8px;font-size:13px;color:#fca5a5;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;">Logout</button>
+    </form>
+  </div>
+  <% } else { %>
+  <nav style="padding:24px 20px;flex:1;">
+    <a href="/about-us" class="mobile-nav-link">About Us</a>
+    <a href="/lodges"   class="mobile-nav-link">Browse Lodges</a>
+  </nav>
+  <div style="padding:20px;display:flex;flex-direction:column;gap:10px;">
+    <a href="/sign-in" style="display:block;text-align:center;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);color:white;font-size:13px;text-decoration:none;">Login</a>
+    <a href="/sign-up" style="display:block;text-align:center;padding:10px;border-radius:10px;background:white;color:#55142A;font-size:13px;font-weight:500;text-decoration:none;">Get started</a>
+  </div>
+  <% } %>
+</div>
+
+<script src="/js/navbar.js"></script>

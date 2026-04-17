@@ -1,298 +1,142 @@
-<section class="space-y-14 px-4 sm:px-6 lg:px-12">
-  <!-- ================= UMUCHIMA ================= -->
-  <section>
-    <div class="mb-6 flex items-center justify-between">
-      <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl">
-        Umuchima Lodges
-      </h2>
+<style>
+  .lodge-card {
+    position: relative; overflow: hidden; border-radius: 18px;
+    background: white; border: 1px solid rgba(0,0,0,0.06);
+    transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s ease;
+    display: block; text-decoration: none; color: inherit;
+  }
+  .lodge-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(85,20,42,0.1); }
+  .lodge-card .card-img { width: 100%; height: 200px; object-fit: cover; display: block; transition: transform 0.5s ease; }
+  .lodge-card:hover .card-img { transform: scale(1.05); }
+  .lodge-card .img-wrap { overflow: hidden; }
+  .save-btn {
+    position: absolute; top: 10px; right: 10px; z-index: 10;
+    width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255,255,255,0.92); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12); backdrop-filter: blur(4px);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .save-btn:hover { transform: scale(1.1); background: white; }
+  .save-btn.saved svg { fill: #55142A; stroke: #55142A; }
+  .community-label {
+    font-size:11px; font-weight:500; color:rgba(255,255,255,0.3);
+    text-transform:uppercase; letter-spacing:0.12em; margin-bottom:10px;
+  }
+  .community-title {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(20px,3vw,26px);
+    font-weight:500; color:#111827; margin-bottom:20px;
+  }
+  .view-all {
+    font-size:12px; font-weight:500; color:#55142A; text-decoration:none;
+    border: 1px solid rgba(85,20,42,0.2); padding:5px 14px; border-radius:999px;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .view-all:hover { background:#55142A; color:white; }
+  .rating-badge {
+    position: absolute; bottom: 10px; left: 10px; z-index: 10;
+    background: rgba(0,0,0,0.55); color: white; backdrop-filter: blur(4px);
+    padding: 3px 9px; border-radius: 8px; font-size: 11px; font-weight: 500;
+    display: flex; align-items: center; gap: 4px;
+  }
+</style>
 
-      <a href="#" class="text-sm font-medium text-[#55142A] hover:underline">
-        View all →
-      </a>
+<div style="display:flex;flex-direction:column;gap:56px;">
+
+  <% const communities = [
+    {
+      name: 'Umuchima', label: 'Community',
+      lodges: [
+        { id:1,  name:'Sunrise Lodge',   price:120000, rating:'4.8', img:'/images/lodge1.jpg' },
+        { id:2,  name:'Prime Lodge',     price:150000, rating:'4.6', img:'/images/lodge2.jpg' },
+        { id:3,  name:'Elite Stay',      price:180000, rating:'4.9', img:'/images/lodge3.jpg' },
+        { id:4,  name:'Budget Lodge',    price:90000,  rating:'4.3', img:'/images/lodge4.jpg' },
+      ]
+    },
+    {
+      name: 'Eziobodo', label: 'Community',
+      lodges: [
+        { id:5,  name:'Royal Lodge',     price:130000, rating:'4.7', img:'/images/lodge5.jpg' },
+        { id:6,  name:'Green View',      price:110000, rating:'4.4', img:'/images/lodge6.jpg' },
+        { id:7,  name:'Cedar Hostel',    price:95000,  rating:'4.2', img:'/images/lodge7.jpg' },
+        { id:8,  name:'The Retreat',     price:160000, rating:'4.8', img:'/images/lodge8.jpg' },
+      ]
+    },
+    {
+      name: 'Ihiagwa', label: 'Community',
+      lodges: [
+        { id:9,  name:'Palm Court',      price:105000, rating:'4.5', img:'/images/lodge9.jpg' },
+        { id:10, name:'Haven Lodge',     price:140000, rating:'4.7', img:'/images/lodge10.jpg' },
+        { id:11, name:'Campus View',     price:85000,  rating:'4.1', img:'/images/lodge11.jpg' },
+        { id:12, name:'Silver Hostel',   price:125000, rating:'4.6', img:'/images/lodge12.jpg' },
+      ]
+    },
+  ] %>
+
+  <% communities.forEach(function(community) { %>
+  <section>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:16px;">
+      <div>
+        <p class="community-label"><%= community.label %></p>
+        <h2 class="community-title"><%= community.name %> Lodges</h2>
+      </div>
+      <a href="/lodges?community=<%= community.name.toLowerCase() %>" class="view-all">View all →</a>
     </div>
 
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      <!-- CARD -->
-      <a href="/select-lodge">
-        <div
-          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-        >
-          <!-- SAVE BUTTON -->
-          <button
-            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-            data-id="1"
-          >
-            <svg
-              class="h-5 w-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-              />
-            </svg>
-          </button>
-
-          <div class="overflow-hidden">
-            <img
-              src="/images/lodge1.jpg"
-              class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-            />
-          </div>
-
-          <div class="space-y-1 p-4">
-            <h3 class="font-semibold">Sunrise Lodge</h3>
-            <p class="text-xs text-gray-500">Umuchima</p>
-            <p class="text-sm font-medium text-[#55142A]">₦120,000 / year</p>
-          </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;">
+      <% community.lodges.forEach(function(lodge) { %>
+      <a href="/select-lodge/<%= lodge.id %>" class="lodge-card">
+        <button class="save-btn" data-id="<%= lodge.id %>" onclick="event.preventDefault();toggleSave(this)" aria-label="Save lodge">
+          <svg style="width:16px;height:16px;" fill="none" stroke="#55142A" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+          </svg>
+        </button>
+        <div class="img-wrap">
+          <img src="<%= lodge.img %>" alt="<%= lodge.name %>" class="card-img" loading="lazy" />
+        </div>
+        <div class="rating-badge">
+          <svg style="width:10px;height:10px;fill:#f59e0b;stroke:none;" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <%= lodge.rating %>
+        </div>
+        <div style="padding:14px 16px 16px;">
+          <h3 style="font-size:14px;font-weight:500;color:#111827;margin-bottom:4px;"><%= lodge.name %></h3>
+          <p style="font-size:12px;color:#9ca3af;margin-bottom:6px;"><%= community.name %></p>
+          <p style="font-size:14px;font-weight:600;color:#55142A;">₦<%= lodge.price.toLocaleString() %> <span style="font-size:11px;font-weight:400;color:#9ca3af;">/ year</span></p>
         </div>
       </a>
-
-      <!-- Repeat cards -->
-      <a href="/select-lodge">
-        <div
-          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-        >
-          <button
-            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-            data-id="2"
-          >
-            <svg
-              class="h-5 w-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-              />
-            </svg>
-          </button>
-          <img
-            src="/images/lodge2.jpg"
-            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-          />
-          <div class="space-y-1 p-4">
-            <h3 class="font-semibold">Prime Lodge</h3>
-            <p class="text-xs text-gray-500">Umuchima</p>
-            <p class="text-sm font-medium text-[#55142A]">₦150,000 / year</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="/select-lodge">
-        <div
-          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-        >
-          <button
-            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-            data-id="3"
-          >
-            <svg
-              class="h-5 w-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-              />
-            </svg>
-          </button>
-          <img
-            src="/images/lodge3.jpg"
-            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-          />
-          <div class="space-y-1 p-4">
-            <h3 class="font-semibold">Elite Stay</h3>
-            <p class="text-xs text-gray-500">Umuchima</p>
-            <p class="text-sm font-medium text-[#55142A]">₦180,000 / year</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="/select-lodge">
-        <div
-          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-        >
-          <button
-            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-            data-id="4"
-          >
-            <svg
-              class="h-5 w-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-              />
-            </svg>
-          </button>
-          <img
-            src="/images/lodge4.jpg"
-            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-          />
-          <div class="space-y-1 p-4">
-            <h3 class="font-semibold">Budget Lodge</h3>
-            <p class="text-xs text-gray-500">Umuchima</p>
-            <p class="text-sm font-medium text-[#55142A]">₦90,000 / year</p>
-          </div>
-        </div>
-      </a>
+      <% }); %>
     </div>
   </section>
+  <% }); %>
 
-  <!-- ================= EZIOBODO ================= -->
-  <section>
-    <div class="mb-6 flex items-center justify-between">
-      <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl">
-        Eziobodo Lodges
-      </h2>
+</div>
 
-      <a href="#" class="text-sm font-medium text-[#55142A] hover:underline">
-        View all →
-      </a>
-    </div>
+<script>
+  const savedIds = new Set(JSON.parse(localStorage.getItem('uponthee_saved') || '[]'));
 
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      <!-- Repeat same structure with lodge5 - lodge8 -->
+  // Mark already-saved lodges on load
+  document.querySelectorAll('.save-btn').forEach(btn => {
+    if (savedIds.has(Number(btn.dataset.id))) btn.classList.add('saved');
+  });
 
-      <a href="/select-lodge">
-        <div
-          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-        >
-          <button
-            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-            data-id="5"
-          >
-            <svg
-              class="h-5 w-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-              />
-            </svg>
-          </button>
-          <img
-            src="/images/lodge5.jpg"
-            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-          />
-          <div class="space-y-1 p-4">
-            <h3 class="font-semibold">Royal Lodge</h3>
-            <p class="text-xs text-gray-500">Eziobodo</p>
-            <p class="text-sm font-medium text-[#55142A]">₦130,000 / year</p>
-          </div>
-        </div>
-      </a>
+  function toggleSave(btn) {
+    const id = Number(btn.dataset.id);
+    if (savedIds.has(id)) {
+      savedIds.delete(id);
+      btn.classList.remove('saved');
+    } else {
+      savedIds.add(id);
+      btn.classList.add('saved');
+    }
+    localStorage.setItem('uponthee_saved', JSON.stringify([...savedIds]));
 
-      <!-- Repeated Lodges -->
-
-      <a href="/select-lodge">
-        <div
-          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-        >
-          <button
-            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-            data-id="2"
-          >
-            <svg
-              class="h-5 w-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-              />
-            </svg>
-          </button>
-          <img
-            src="/images/lodge6.jpg"
-            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-          />
-          <div class="space-y-1 p-4">
-            <h3 class="font-semibold">Prime Lodge</h3>
-            <p class="text-xs text-gray-500">Umuchima</p>
-            <p class="text-sm font-medium text-[#55142A]">₦150,000 / year</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="/select-lodge">
-        <div
-          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-        >
-          <button
-            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-            data-id="3"
-          >
-            <svg
-              class="h-5 w-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-              />
-            </svg>
-          </button>
-          <img
-            src="/images/lodge7.jpg"
-            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-          />
-          <div class="space-y-1 p-4">
-            <h3 class="font-semibold">Elite Stay</h3>
-            <p class="text-xs text-gray-500">Umuchima</p>
-            <p class="text-sm font-medium text-[#55142A]">₦180,000 / year</p>
-          </div>
-        </div>
-      </a>
-
-      <a href="/select-lodge">
-        <div
-          class="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white transition hover:shadow-lg"
-        >
-          <button
-            class="save-btn absolute top-3 right-3 z-10 rounded-full bg-white/90 p-2 shadow backdrop-blur transition hover:scale-110"
-            data-id="4"
-          >
-            <svg
-              class="h-5 w-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M12 21s-6.716-4.438-9.428-8.01C-0.428 9.41 2.02 3 7.5 3c2.033 0 3.5 1.5 4.5 2.5C13 4.5 14.467 3 16.5 3 21.98 3 24.428 9.41 21.428 12.99 18.716 16.562 12 21 12 21z"
-              />
-            </svg>
-          </button>
-          <img
-            src="/images/lodge8.jpg"
-            class="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
-          />
-          <div class="space-y-1 p-4">
-            <h3 class="font-semibold">Budget Lodge</h3>
-            <p class="text-xs text-gray-500">Umuchima</p>
-            <p class="text-sm font-medium text-[#55142A]">₦90,000 / year</p>
-          </div>
-        </div>
-      </a>
-    </div>
-  </section>
-</section>
+    // Sync with backend silently
+    fetch('/saved/toggle', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ lodge_id: id }),
+    }).catch(() => {});
+  }
+</script>
