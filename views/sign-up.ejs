@@ -10,184 +10,129 @@
   <link rel="stylesheet" href="/src/output.css" />
   <style>
     body { font-family: 'DM Sans', sans-serif; }
-    .bg-pattern {
-      background-color: #f8f6f3;
-      background-image:
-        radial-gradient(circle at 15% 15%, rgba(85,20,42,0.07) 0%, transparent 55%),
-        radial-gradient(circle at 85% 85%, rgba(85,20,42,0.05) 0%, transparent 55%);
-    }
-    .input-field {
-      width: 100%; border: 1px solid #e5e7eb; border-radius: 12px;
-      padding: 11px 16px; font-size: 14px; font-family: 'DM Sans', sans-serif;
-      color: #111827; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; outline: none;
-    }
-    .input-field:focus { border-color: #55142A; box-shadow: 0 0 0 3px rgba(85,20,42,0.08); }
-    .input-field::placeholder { color: #9ca3af; }
-    .input-field.error { border-color: #ef4444; }
-
-    .password-wrap { position: relative; }
-    .eye-btn {
-      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-      background: none; border: none; cursor: pointer; color: #9ca3af; padding: 0; display: flex; align-items: center;
-    }
-    .eye-btn:hover { color: #55142A; }
-
-    .btn-primary {
-      width: 100%; background: #55142A; color: white; border: none;
-      border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 500;
-      font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s, transform 0.15s;
-    }
-    .btn-primary:hover { background: #6e1a35; }
-    .btn-primary:active { transform: scale(0.99); }
-    .btn-primary:disabled { background: #b08090; cursor: not-allowed; }
-
-    .card {
-      background: white; border: 1px solid rgba(0,0,0,0.06); border-radius: 24px;
-      padding: 40px; box-shadow: 0 4px 40px rgba(0,0,0,0.06); width: 100%; max-width: 480px;
-    }
-    @media (max-width: 520px) { .card { padding: 28px 20px; } }
-
-    /* Password strength */
-    .strength-bar { height: 3px; border-radius: 999px; background: #f3f4f6; overflow: hidden; margin-top: 8px; }
-    .strength-fill { height: 100%; border-radius: 999px; transition: width 0.3s ease, background 0.3s ease; width: 0%; }
-
-    /* Step indicator */
-    .step-dot {
-      width: 8px; height: 8px; border-radius: 50%; background: #e5e7eb;
-      transition: background 0.3s, transform 0.3s;
-    }
-    .step-dot.active { background: #55142A; transform: scale(1.2); }
-    .step-dot.done { background: #A79A79; }
+    .input-field { width:100%; border:1px solid #e5e7eb; border-radius:12px; padding:11px 16px; font-size:14px; font-family:'DM Sans',sans-serif; color:#111827; background:#fff; transition:border-color 0.2s,box-shadow 0.2s; outline:none; box-sizing:border-box; }
+    .input-field:focus { border-color:#55142A; box-shadow:0 0 0 3px rgba(85,20,42,0.08); }
+    .input-field::placeholder { color:#9ca3af; }
+    .eye-btn { position:absolute; right:14px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#9ca3af; padding:0; display:flex; align-items:center; }
+    .eye-btn:hover { color:#55142A; }
+    .step-dot { width:8px; height:8px; border-radius:50%; background:#e5e7eb; transition:background 0.3s,transform 0.3s; }
+    .step-dot.active { background:#55142A; transform:scale(1.2); }
+    .step-dot.done { background:#A79A79; }
+    .strength-bar { height:3px; border-radius:999px; background:#f3f4f6; overflow:hidden; margin-top:8px; }
+    .strength-fill { height:100%; border-radius:999px; transition:width 0.3s,background 0.3s; width:0%; }
   </style>
 </head>
+<body class="min-h-dvh bg-[#f8f6f3] [background-image:radial-gradient(circle_at_15%_15%,rgba(85,20,42,0.07)_0%,transparent_55%),radial-gradient(circle_at_85%_85%,rgba(85,20,42,0.05)_0%,transparent_55%)] flex items-center justify-center px-4 py-10">
 
-<body class="bg-pattern min-h-dvh flex items-center justify-center px-4 py-10">
+  <div class="flex w-full flex-col items-center gap-6">
 
-  <div class="w-full flex flex-col items-center gap-6">
+    <a href="/" class="text-2xl font-semibold text-[#55142A] tracking-[0.05em]" style="font-family:'Cormorant Garamond',serif; text-decoration:none;">Uponthee</a>
 
-    <!-- Logo -->
-    <a href="/" style="font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:600; color:#55142A; letter-spacing:0.05em; text-decoration:none;">
-      Uponthee
-    </a>
+    <div class="w-full max-w-[480px] rounded-3xl border border-black/[0.06] bg-white p-10 shadow-[0_4px_40px_rgba(0,0,0,0.06)]">
 
-    <div class="card">
-
-      <!-- Header -->
-      <div class="text-center mb-2">
-        <h1 style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:500; color:#111827; margin-bottom:6px;">
-          Create your account
-        </h1>
-        <p style="font-size:13px; color:#6b7280; line-height:1.6;">
-          Join students already finding great lodges around FUTO.
-        </p>
+      <div class="mb-2 text-center">
+        <h1 class="mb-1.5 text-[28px] font-medium text-gray-900" style="font-family:'Cormorant Garamond',serif;">Create your account</h1>
+        <p class="text-[13px] leading-relaxed text-gray-500">Join students already finding great lodges around FUTO.</p>
       </div>
 
       <!-- Step dots -->
-      <div style="display:flex; justify-content:center; gap:8px; margin:20px 0 28px;">
+      <div class="my-5 flex justify-center gap-2">
         <div class="step-dot active" id="dot-1"></div>
         <div class="step-dot" id="dot-2"></div>
         <div class="step-dot" id="dot-3"></div>
       </div>
 
-      <!-- Error -->
       <% if (typeof error !== 'undefined' && error) { %>
-      <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:10px; padding:12px 14px; margin-bottom:20px; display:flex; align-items:center; gap:10px;">
-        <svg style="width:16px;height:16px;color:#dc2626;flex-shrink:0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/>
-        </svg>
-        <p style="font-size:13px; color:#dc2626;"><%= error %></p>
+      <div class="mb-5 flex items-center gap-2.5 rounded-xl border border-red-200 bg-red-50 px-3.5 py-3">
+        <svg class="h-4 w-4 shrink-0 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+        <p class="text-[13px] text-red-600"><%= error %></p>
       </div>
       <% } %>
 
-      <!-- Form -->
       <form action="/sign-up" method="post" id="signup-form">
 
-        <!-- Step 1: Name -->
+        <!-- Step 1 -->
         <div id="step-1">
-          <p style="font-size:11px; font-weight:500; color:#9ca3af; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px;">Step 1 of 3 — Your name</p>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+          <p class="mb-4 text-[11px] font-medium uppercase tracking-[0.1em] text-gray-400">Step 1 of 3 — Your name</p>
+          <div class="mb-3.5 grid grid-cols-2 gap-3.5">
             <div>
-              <label style="display:block; font-size:12px; font-weight:500; color:#374151; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.06em;">First name</label>
+              <label class="mb-1.5 block text-[12px] font-medium uppercase tracking-[0.06em] text-gray-600">First name</label>
               <input type="text" name="first_name" id="first_name" placeholder="Ada" required autocomplete="given-name" class="input-field" />
             </div>
             <div>
-              <label style="display:block; font-size:12px; font-weight:500; color:#374151; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.06em;">Last name</label>
+              <label class="mb-1.5 block text-[12px] font-medium uppercase tracking-[0.06em] text-gray-600">Last name</label>
               <input type="text" name="last_name" id="last_name" placeholder="Okafor" required autocomplete="family-name" class="input-field" />
             </div>
           </div>
-          <button type="button" class="btn-primary" id="next-1" onclick="goStep(2)">Continue</button>
+          <button type="button" onclick="goStep(2)" class="w-full rounded-xl bg-[#55142A] py-[13px] text-sm font-medium text-white transition hover:bg-[#6e1a35] active:scale-[0.99]">Continue</button>
         </div>
 
-        <!-- Step 2: Contact -->
-        <div id="step-2" style="display:none;">
-          <p style="font-size:11px; font-weight:500; color:#9ca3af; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px;">Step 2 of 3 — Contact details</p>
-          <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:14px;">
+        <!-- Step 2 -->
+        <div id="step-2" class="hidden">
+          <p class="mb-4 text-[11px] font-medium uppercase tracking-[0.1em] text-gray-400">Step 2 of 3 — Contact details</p>
+          <div class="mb-3.5 flex flex-col gap-3.5">
             <div>
-              <label style="display:block; font-size:12px; font-weight:500; color:#374151; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.06em;">Email</label>
+              <label class="mb-1.5 block text-[12px] font-medium uppercase tracking-[0.06em] text-gray-600">Email</label>
               <input type="email" name="email" id="email" placeholder="ada@example.com" required autocomplete="email" class="input-field" />
             </div>
             <div>
-              <label style="display:block; font-size:12px; font-weight:500; color:#374151; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.06em;">Phone number</label>
+              <label class="mb-1.5 block text-[12px] font-medium uppercase tracking-[0.06em] text-gray-600">Phone number</label>
               <input type="tel" name="phone" id="phone" placeholder="08012345678" autocomplete="tel" class="input-field" />
             </div>
           </div>
-          <div style="display:flex; gap:10px;">
-            <button type="button" class="btn-primary" style="background:#f3f4f6; color:#374151;" onclick="goStep(1)">Back</button>
-            <button type="button" class="btn-primary" onclick="goStep(3)">Continue</button>
+          <div class="flex gap-2.5">
+            <button type="button" onclick="goStep(1)" class="flex-1 rounded-xl bg-gray-100 py-[13px] text-sm text-gray-700 transition hover:bg-gray-200">Back</button>
+            <button type="button" onclick="goStep(3)" class="flex-1 rounded-xl bg-[#55142A] py-[13px] text-sm font-medium text-white transition hover:bg-[#6e1a35]">Continue</button>
           </div>
         </div>
 
-        <!-- Step 3: Password -->
-        <div id="step-3" style="display:none;">
-          <p style="font-size:11px; font-weight:500; color:#9ca3af; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px;">Step 3 of 3 — Set a password</p>
-          <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:14px;">
+        <!-- Step 3 -->
+        <div id="step-3" class="hidden">
+          <p class="mb-4 text-[11px] font-medium uppercase tracking-[0.1em] text-gray-400">Step 3 of 3 — Set a password</p>
+          <div class="mb-3.5 flex flex-col gap-3.5">
             <div>
-              <label style="display:block; font-size:12px; font-weight:500; color:#374151; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.06em;">Password</label>
-              <div class="password-wrap">
-                <input type="password" name="password" id="password" placeholder="Min. 8 characters" required autocomplete="new-password" class="input-field" style="padding-right:44px;" />
-                <button type="button" class="eye-btn" onclick="togglePw('password','eye1-open','eye1-closed')" aria-label="Show password">
-                  <svg id="eye1-open" style="width:18px;height:18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
-                  <svg id="eye1-closed" style="width:18px;height:18px;display:none;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"/></svg>
+              <label class="mb-1.5 block text-[12px] font-medium uppercase tracking-[0.06em] text-gray-600">Password</label>
+              <div class="relative">
+                <input type="password" name="password" id="password" placeholder="Min. 8 characters" required autocomplete="new-password" class="input-field pr-11" />
+                <button type="button" class="eye-btn" onclick="togglePw('password','eye1-open','eye1-closed')">
+                  <svg id="eye1-open" class="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+                  <svg id="eye1-closed" class="hidden h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"/></svg>
                 </button>
               </div>
-              <!-- Strength bar -->
               <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
-              <p style="font-size:11px; color:#9ca3af; margin-top:4px;" id="strength-label"></p>
+              <p class="mt-1 text-[11px] text-gray-400" id="strength-label"></p>
             </div>
             <div>
-              <label style="display:block; font-size:12px; font-weight:500; color:#374151; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.06em;">Confirm password</label>
-              <div class="password-wrap">
-                <input type="password" name="confirm_password" id="confirm_password" placeholder="Re-enter password" required autocomplete="new-password" class="input-field" style="padding-right:44px;" />
-                <button type="button" class="eye-btn" onclick="togglePw('confirm_password','eye2-open','eye2-closed')" aria-label="Show password">
-                  <svg id="eye2-open" style="width:18px;height:18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
-                  <svg id="eye2-closed" style="width:18px;height:18px;display:none;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"/></svg>
+              <label class="mb-1.5 block text-[12px] font-medium uppercase tracking-[0.06em] text-gray-600">Confirm password</label>
+              <div class="relative">
+                <input type="password" name="confirm_password" id="confirm_password" placeholder="Re-enter password" required autocomplete="new-password" class="input-field pr-11" />
+                <button type="button" class="eye-btn" onclick="togglePw('confirm_password','eye2-open','eye2-closed')">
+                  <svg id="eye2-open" class="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+                  <svg id="eye2-closed" class="hidden h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"/></svg>
                 </button>
               </div>
-              <p style="font-size:12px; color:#ef4444; margin-top:4px; display:none;" id="pw-match-err">Passwords do not match</p>
+              <p class="mt-1 hidden text-xs text-red-500" id="pw-match-err">Passwords do not match</p>
             </div>
           </div>
-
-          <div style="display:flex; align-items:flex-start; gap:10px; margin-bottom:18px;">
-            <input type="checkbox" name="terms" id="terms" required style="margin-top:2px; accent-color:#55142A; flex-shrink:0;" />
-            <label for="terms" style="font-size:12px; color:#6b7280; line-height:1.6; cursor:pointer;">
-              I agree to Uponthee's <a href="/terms" style="color:#55142A;">Terms of Service</a> and <a href="/privacy" style="color:#55142A;">Privacy Policy</a>
+          <div class="mb-4 flex items-start gap-2.5">
+            <input type="checkbox" name="terms" id="terms" required class="mt-0.5 shrink-0 accent-[#55142A]" />
+            <label for="terms" class="cursor-pointer text-xs leading-relaxed text-gray-500">
+              I agree to Uponthee's <a href="/terms" class="text-[#55142A]">Terms of Service</a> and <a href="/privacy" class="text-[#55142A]">Privacy Policy</a>
             </label>
           </div>
-
-          <div style="display:flex; gap:10px;">
-            <button type="button" class="btn-primary" style="background:#f3f4f6; color:#374151;" onclick="goStep(2)">Back</button>
-            <button type="submit" class="btn-primary" id="submit-btn">
+          <div class="flex gap-2.5">
+            <button type="button" onclick="goStep(2)" class="flex-1 rounded-xl bg-gray-100 py-[13px] text-sm text-gray-700 transition hover:bg-gray-200">Back</button>
+            <button type="submit" id="submit-btn" class="flex-1 rounded-xl bg-[#55142A] py-[13px] text-sm font-medium text-white transition hover:bg-[#6e1a35] disabled:cursor-not-allowed disabled:bg-[#b08090]">
               <span id="btn-text">Create account</span>
-              <span id="btn-loading" style="display:none;">Creating...</span>
+              <span id="btn-loading" class="hidden">Creating...</span>
             </button>
           </div>
         </div>
 
       </form>
 
-      <p style="text-align:center; font-size:13px; color:#6b7280; margin-top:24px;">
-        Already have an account?
-        <a href="/sign-in" style="color:#55142A; font-weight:500; text-decoration:none;">Sign in</a>
+      <p class="mt-6 text-center text-[13px] text-gray-500">
+        Already have an account? <a href="/sign-in" class="font-medium text-[#55142A] hover:underline">Sign in</a>
       </p>
 
     </div>
@@ -196,65 +141,36 @@
   <script>
     function goStep(n) {
       [1,2,3].forEach(i => {
-        document.getElementById('step-'+i).style.display = i === n ? 'block' : 'none';
+        const el = document.getElementById('step-'+i);
+        el.style.display = i === n ? 'block' : 'none';
+        el.classList.toggle('hidden', i !== n);
         const dot = document.getElementById('dot-'+i);
         dot.className = 'step-dot' + (i === n ? ' active' : i < n ? ' done' : '');
       });
     }
-
     function togglePw(id, openId, closedId) {
-      const f = document.getElementById(id);
-      const show = f.type === 'password';
+      const f = document.getElementById(id), show = f.type === 'password';
       f.type = show ? 'text' : 'password';
-      document.getElementById(openId).style.display   = show ? 'none' : 'block';
-      document.getElementById(closedId).style.display = show ? 'block' : 'none';
+      document.getElementById(openId).classList.toggle('hidden', show);
+      document.getElementById(closedId).classList.toggle('hidden', !show);
     }
-
-    // Password strength
     document.getElementById('password').addEventListener('input', function () {
-      const val = this.value;
-      let score = 0;
-      if (val.length >= 8) score++;
-      if (/[A-Z]/.test(val)) score++;
-      if (/[0-9]/.test(val)) score++;
-      if (/[^A-Za-z0-9]/.test(val)) score++;
-
-      const fill  = document.getElementById('strength-fill');
-      const label = document.getElementById('strength-label');
-      const configs = [
-        { pct: '0%',   color: '#f3f4f6', text: '' },
-        { pct: '25%',  color: '#ef4444', text: 'Weak' },
-        { pct: '50%',  color: '#f97316', text: 'Fair' },
-        { pct: '75%',  color: '#eab308', text: 'Good' },
-        { pct: '100%', color: '#22c55e', text: 'Strong' },
-      ];
-      const c = configs[score];
-      fill.style.width      = c.pct;
-      fill.style.background = c.color;
-      label.textContent     = c.text;
-      label.style.color     = c.color;
+      const val = this.value; let score = 0;
+      if (val.length >= 8) score++; if (/[A-Z]/.test(val)) score++;
+      if (/[0-9]/.test(val)) score++; if (/[^A-Za-z0-9]/.test(val)) score++;
+      const fill = document.getElementById('strength-fill'), label = document.getElementById('strength-label');
+      const c = [{ pct:'0%',color:'#f3f4f6',text:'' },{ pct:'25%',color:'#ef4444',text:'Weak' },{ pct:'50%',color:'#f97316',text:'Fair' },{ pct:'75%',color:'#eab308',text:'Good' },{ pct:'100%',color:'#22c55e',text:'Strong' }][score];
+      fill.style.width = c.pct; fill.style.background = c.color; label.textContent = c.text; label.style.color = c.color;
     });
-
-    // Match check
     document.getElementById('confirm_password').addEventListener('input', function () {
-      const pw  = document.getElementById('password').value;
-      const err = document.getElementById('pw-match-err');
-      err.style.display = (this.value && this.value !== pw) ? 'block' : 'none';
+      document.getElementById('pw-match-err').classList.toggle('hidden', !this.value || this.value === document.getElementById('password').value);
     });
-
-    // Submit
     document.getElementById('signup-form').addEventListener('submit', function (e) {
-      const pw  = document.getElementById('password').value;
-      const cpw = document.getElementById('confirm_password').value;
-      if (pw !== cpw) {
-        e.preventDefault();
-        document.getElementById('pw-match-err').style.display = 'block';
-        return;
+      if (document.getElementById('password').value !== document.getElementById('confirm_password').value) {
+        e.preventDefault(); document.getElementById('pw-match-err').classList.remove('hidden'); return;
       }
-      const btn  = document.getElementById('submit-btn');
-      btn.disabled = true;
-      document.getElementById('btn-text').style.display    = 'none';
-      document.getElementById('btn-loading').style.display = 'inline';
+      const btn = document.getElementById('submit-btn'); btn.disabled = true;
+      document.getElementById('btn-text').classList.add('hidden'); document.getElementById('btn-loading').classList.remove('hidden');
     });
   </script>
 </body>

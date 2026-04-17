@@ -1,152 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Bookings</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Bookings — Uponthee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/output.css" />
+  <link rel="stylesheet" href="/src/navbar.css" />
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    @keyframes slideUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    .booking-card { opacity:0; animation:slideUp 0.4s cubic-bezier(0.22,1,0.36,1) forwards; transition:box-shadow 0.2s; }
+    .booking-card:hover { box-shadow:0 8px 32px rgba(85,20,42,0.08); }
+    .badge-confirmed { background:#dcfce7; color:#166534; }
+    .badge-pending   { background:#fef9c3; color:#854d0e; }
+    .badge-completed { background:#dbeafe; color:#1e40af; }
+    .badge-cancelled { background:#fee2e2; color:#991b1b; }
+    .filter-pill.active { background:#55142A; color:white; border-color:#55142A; }
+    .progress-bar { height:3px; background:#f3f4f6; border-radius:999px; overflow:hidden; }
+    .progress-fill { height:100%; background:#55142A; border-radius:999px; transition:width 0.6s cubic-bezier(0.22,1,0.36,1); }
+  </style>
+</head>
+<body class="min-h-screen bg-[#f8f6f3] pt-16">
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/src/output.css" />
+  <%- include('partials/header.ejs') %>
 
-    <style>
-      body {
-        font-family: "DM Sans", sans-serif;
-      }
-    </style>
-  </head>
+  <!-- Hero -->
+  <div class="bg-[#55142A] px-6 pb-10 pt-12 md:px-12 lg:px-20">
+    <div class="mx-auto max-w-6xl">
+      <p class="mb-1 text-lg text-[#A79A79]" style="font-family:'Cormorant Garamond',serif;">Your journey</p>
+      <h1 class="text-4xl font-medium text-white md:text-5xl" style="font-family:'Cormorant Garamond',serif;">My bookings</h1>
+      <p class="mt-2 text-sm text-white/50">Track, manage and review all your stays in one place</p>
+    </div>
+  </div>
 
-  <body class="min-h-screen bg-gray-50">
-    <main class="mx-auto max-w-6xl px-4 py-10">
-      <!-- HEADER -->
-      <div class="mb-10 flex items-end justify-between">
-        <div>
-          <h1 class="text-3xl font-semibold text-gray-900">My Bookings</h1>
-          <p class="mt-1 text-sm text-gray-500">Manage and track your stays</p>
-        </div>
+  <!-- Stats -->
+  <div class="border-b border-gray-100 bg-white px-6 md:px-12 lg:px-20">
+    <div class="mx-auto max-w-6xl grid grid-cols-2 divide-x divide-gray-100 md:grid-cols-4">
+      <div class="py-5 pr-6"><p class="mb-1 text-xs uppercase tracking-widest text-gray-400">Total</p><p class="text-2xl font-medium text-gray-900" id="stat-total">—</p></div>
+      <div class="py-5 px-6"><p class="mb-1 text-xs uppercase tracking-widest text-gray-400">Upcoming</p><p class="text-2xl font-medium text-[#55142A]" id="stat-upcoming">—</p></div>
+      <div class="py-5 px-6"><p class="mb-1 text-xs uppercase tracking-widest text-gray-400">Completed</p><p class="text-2xl font-medium text-gray-900" id="stat-completed">—</p></div>
+      <div class="py-5 pl-6"><p class="mb-1 text-xs uppercase tracking-widest text-gray-400">Total spent</p><p class="text-2xl font-medium text-[#A79A79]" id="stat-spent">—</p></div>
+    </div>
+  </div>
 
-        <a
-          href="/"
-          class="text-sm text-gray-500 transition hover:text-gray-900"
-        >
-          Home
-        </a>
+  <main class="mx-auto max-w-6xl px-6 py-10 md:px-12 lg:px-20">
+
+    <!-- Filters -->
+    <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-wrap gap-2" id="filter-pills">
+        <button class="filter-pill active rounded-full border border-gray-200 bg-white px-4 py-1.5 text-sm text-gray-600 transition" data-filter="all">All</button>
+        <button class="filter-pill rounded-full border border-gray-200 bg-white px-4 py-1.5 text-sm text-gray-600 transition" data-filter="confirmed">Confirmed</button>
+        <button class="filter-pill rounded-full border border-gray-200 bg-white px-4 py-1.5 text-sm text-gray-600 transition" data-filter="pending">Pending</button>
+        <button class="filter-pill rounded-full border border-gray-200 bg-white px-4 py-1.5 text-sm text-gray-600 transition" data-filter="completed">Completed</button>
+        <button class="filter-pill rounded-full border border-gray-200 bg-white px-4 py-1.5 text-sm text-gray-600 transition" data-filter="cancelled">Cancelled</button>
       </div>
-
-      <!-- STATS -->
-      <div class="mb-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-        <div class="rounded-xl border border-gray-100 bg-white p-4">
-          <p class="text-xs text-gray-400 uppercase">Total</p>
-          <p id="stat-total" class="mt-1 text-xl font-semibold">—</p>
-        </div>
-
-        <div class="rounded-xl border border-gray-100 bg-white p-4">
-          <p class="text-xs text-gray-400 uppercase">Upcoming</p>
-          <p
-            id="stat-upcoming"
-            class="mt-1 text-xl font-semibold text-green-600"
-          >
-            —
-          </p>
-        </div>
-
-        <div class="rounded-xl border border-gray-100 bg-white p-4">
-          <p class="text-xs text-gray-400 uppercase">Completed</p>
-          <p id="stat-completed" class="mt-1 text-xl font-semibold">—</p>
-        </div>
-
-        <div class="rounded-xl border border-gray-100 bg-white p-4">
-          <p class="text-xs text-gray-400 uppercase">Spent</p>
-          <p id="stat-spent" class="mt-1 text-xl font-semibold">—</p>
-        </div>
-      </div>
-
-      <!-- FILTER -->
-      <div class="mb-8 flex flex-wrap gap-2">
-        <button
-          class="active rounded-full border bg-gray-900 px-4 py-1.5 text-sm text-white filter"
-          data-filter="all"
-        >
-          All
-        </button>
-        <button
-          class="rounded-full border px-4 py-1.5 text-sm text-gray-600 filter"
-          data-filter="confirmed"
-        >
-          Confirmed
-        </button>
-        <button
-          class="rounded-full border px-4 py-1.5 text-sm text-gray-600 filter"
-          data-filter="pending"
-        >
-          Pending
-        </button>
-        <button
-          class="rounded-full border px-4 py-1.5 text-sm text-gray-600 filter"
-          data-filter="completed"
-        >
-          Completed
-        </button>
-      </div>
-
-      <!-- LIST -->
-      <div id="bookings-list" class="space-y-5"></div>
-
-      <!-- EMPTY -->
-      <div id="empty-state" class="hidden py-24 text-center">
-        <p class="text-lg font-semibold text-gray-800">No bookings yet</p>
-        <p class="mt-1 text-sm text-gray-500">Start exploring lodges</p>
-      </div>
-    </main>
-
-    <!-- MODAL -->
-    <div
-      id="modal"
-      class="fixed inset-0 hidden items-center justify-center bg-black/40"
-    >
-      <div class="w-full max-w-md rounded-xl bg-white p-6">
-        <h3 class="mb-3 text-lg font-semibold">Cancel booking?</h3>
-        <p class="mb-5 text-sm text-gray-500">This action cannot be undone.</p>
-
-        <div class="flex gap-3">
-          <button
-            id="confirmCancel"
-            class="flex-1 rounded-lg bg-red-600 py-2 text-white"
-          >
-            Cancel Booking
-          </button>
-          <button id="closeModal" class="flex-1 rounded-lg border py-2">
-            Close
-          </button>
-        </div>
-      </div>
+      <select id="sort-select" class="self-start rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-600 outline-none focus:border-[#55142A] sm:self-auto">
+        <option value="date-desc">Newest first</option>
+        <option value="date-asc">Oldest first</option>
+        <option value="price-desc">Highest price</option>
+        <option value="price-asc">Lowest price</option>
+      </select>
     </div>
 
-    <script>
-      const BOOKINGS_DATA = [
-        {
-          id: 1,
-          name: "Emerald Lodge",
-          location: "FUTO",
-          date: "2026-04-20",
-          price: 120000,
-          status: "confirmed",
-          image: "/images/lodge1.jpg",
-        },
-        {
-          id: 2,
-          name: "Palm Hostel",
-          location: "Ihiagwa",
-          date: "2026-03-10",
-          price: 90000,
-          status: "completed",
-          image: "/images/lodge2.jpg",
-        },
-      ];
-    </script>
+    <div id="bookings-list" class="flex flex-col gap-5"></div>
 
-    <script src="/js/bookings.js"></script>
-  </body>
+    <!-- Empty -->
+    <div id="empty-state" class="hidden py-24 text-center">
+      <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#55142A]/10">
+        <svg class="h-7 w-7 text-[#55142A]/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25"/>
+        </svg>
+      </div>
+      <p class="text-xl text-gray-700" style="font-family:'Cormorant Garamond',serif;">No bookings found</p>
+      <p class="mt-1 text-sm text-gray-400">Try a different filter or explore available lodges</p>
+      <a href="/lodges" class="mt-5 inline-block rounded-lg bg-[#55142A] px-6 py-2.5 text-sm text-white transition hover:bg-[#6e1a35]">Explore lodges</a>
+    </div>
+
+  </main>
+
+  <!-- Cancel modal -->
+  <div id="cancel-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/45 p-4">
+    <div class="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl">
+      <div class="mb-6 flex items-start gap-4">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-50">
+          <svg class="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+        </div>
+        <div>
+          <h3 class="text-xl font-medium text-gray-900" style="font-family:'Cormorant Garamond',serif;">Cancel this booking?</h3>
+          <p class="mt-1 text-sm text-gray-500">This action cannot be undone. Cancellation policy may apply.</p>
+        </div>
+      </div>
+      <div id="cancel-booking-info" class="mb-6 rounded-xl bg-gray-50 p-4 text-sm text-gray-600"></div>
+      <div class="flex gap-3">
+        <button id="cancel-confirm-btn" class="flex-1 rounded-xl bg-red-600 py-2.5 text-sm font-medium text-white transition hover:bg-red-700 active:scale-95">Yes, cancel</button>
+        <button id="cancel-dismiss-btn" class="flex-1 rounded-xl border border-gray-200 py-2.5 text-sm text-gray-600 transition hover:bg-gray-50">Keep booking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail modal -->
+  <div id="detail-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/45 p-4">
+    <div class="w-full max-w-lg rounded-2xl bg-white shadow-2xl">
+      <div id="detail-content" class="p-8"></div>
+      <div class="flex justify-end border-t border-gray-100 px-8 py-4">
+        <button id="detail-dismiss-btn" class="text-sm text-gray-500 transition hover:text-gray-800">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partials/footer.ejs') %>
+
+  <script>
+    const BOOKINGS_DATA = <%- JSON.stringify(typeof bookings !== 'undefined' ? bookings : [
+      { id:'UPT-20481', name:'Emerald Heights Lodge', location:'Port Harcourt, Rivers State', check_in:'2026-04-20', check_out:'2026-04-24', nights:4, price_per_night:28000, total:112000, status:'confirmed', guests:2, image:'/images/lodge1.jpg', lodge_id:1 },
+      { id:'UPT-19874', name:'Riverside Guest House', location:'Asaba, Delta State', check_in:'2026-03-10', check_out:'2026-03-13', nights:3, price_per_night:18500, total:55500, status:'completed', guests:1, image:'/images/lodge2.jpg', lodge_id:2 },
+      { id:'UPT-20102', name:'Skyline Apartment', location:'Lekki, Lagos', check_in:'2026-05-01', check_out:'2026-05-05', nights:4, price_per_night:45000, total:180000, status:'pending', guests:3, image:'/images/lodge3.jpg', lodge_id:3 },
+      { id:'UPT-18990', name:'Palm Court Suites', location:'Abuja, FCT', check_in:'2026-02-14', check_out:'2026-02-16', nights:2, price_per_night:35000, total:70000, status:'cancelled', guests:2, image:'/images/lodge4.jpg', lodge_id:4 },
+    ]) %>;
+  </script>
+  <script src="/js/navbar.js"></script>
+  <script src="/js/bookings.js"></script>
+</body>
 </html>
