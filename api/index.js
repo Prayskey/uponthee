@@ -188,9 +188,10 @@ app.get('/select-lodge/:id', (req, res) => {
 
 ////////////////////////////////////////////////////////////
 app.post('/sign-up', async (req, res) => {
+    console.log(req.body);
     try {
-        const { firstName, lastName, userName, email, phoneNumber, password } = req.body;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const { firstName, lastName, email, phone, confirm_password } = req.body;
+        const hashedPassword = await bcrypt.hash(confirm_password, saltRounds);
 
         // Check if the user already exists in the database
         const existingUser = await db.query("SELECT * FROM users WHERE email = $1", [email]);
@@ -198,7 +199,7 @@ app.post('/sign-up', async (req, res) => {
             return res.status(400).render('sign-up.ejs', { error: "User already exists.", })
         };
         // Insert the new user into the database
-        const user = await db.query("INSERT INTO users (first_name, last_name, user_name, email, phone_number, password) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [firstName, lastName, userName, email, phoneNumber, hashedPassword]);
+        const user = await db.query("INSERT INTO users (first_name, last_name, email, phone_number, password) VALUES ($1, $2, $3, $4, $5) RETURNING *", [firstName, lastName, email, phone, hashedPassword]);
 
         // Log the user in immediately after successful sign-up
         req.login(user.rows[0], (err) => {
